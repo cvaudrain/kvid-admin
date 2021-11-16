@@ -9,6 +9,19 @@ import JobViewer from "./JobViewer";
 
 function App() {
 const history = useHistory();
+let selected = {
+  id: "not selected",
+  jobName: "not selected",
+  description:"not selected",
+  price:"not selected",
+  priceInCents:"not selected",
+  customerName: "not selected",
+  confirmationCode: "not selected",
+  completed: "not selected",
+  paid: "not selected",
+  notes:"not selected",
+  completed:"not selected"
+}
 
   return (
     <div className="gallery-br">
@@ -32,7 +45,9 @@ const history = useHistory();
       navArg={"/create-job"}
       faClass={"fas fa-3x fa-arrow-circle-right"}
     />
-    <JobViewer/>
+    <JobViewer
+      selectedJob = {selected}
+    />
     </Route>
 
     </Switch>

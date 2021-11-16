@@ -49,11 +49,11 @@ export default function ModalEditor(props){
                
             </div>
           <form id="job-form" className="theGoodShading">
-            <input onChange={handleChange} name="jobName" placeholder="Job Name" required={true} />
-        <input onChange={handleChange} name="price" placeholder="Price" required={true} />
-        <input onChange={handleChange} name="customerName" placeholder="Client Name" required={true}/>
-        <input onChange={handleChange} name="description" placeholder="Job Description" />
-        <textarea onChange={handleChange} name="notes" placeholder="Notes" className="centered" />
+            <input onChange={handleChange} value={formData.jobName} name="jobName" placeholder="Job Name" required={true} />
+        <input onChange={handleChange} value={formData.price} name="price" placeholder="Price" required={true} />
+        <input onChange={handleChange} value={formData.customerName} name="customerName" placeholder="Client Name" required={true}/>
+        <input onChange={handleChange} value={formData.description} name="description" placeholder="Job Description" />
+        <textarea onChange={handleChange} value={formData.notes} name="notes" placeholder="Notes" className="centered" />
     
         <div className="option-row row">
         <div className="col-12">

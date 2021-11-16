@@ -128,7 +128,7 @@ app.post("/api/addJob",(req,res)=>{
         // jobData.save()
         res.json(jobData)
         let newJob = new OrderModel({
-            id: jobData.id,
+            // id: jobData.id,
         jobName: jobData.jobName,
         description:jobData.description,
         price:jobData.price,
@@ -181,18 +181,24 @@ app.post("/api/deleteJob",(req,res)=>{
     console.log("post req from client recieved at /api/deleteJob")
     //receive payload with job obj
     console.log(req.body.deletionId)
-    OrderModel.findOneAndDelete({id:req.body.deletionId},(err,doc)=>{
+    OrderModel.findOneAndDelete({_id:req.body.deletionId},(err,doc)=>{
         if(err){
             console.log(err)
             res.json(err)
         } else if(!doc){
           res.json("error")
         } else if(doc){
-            res.json("deleted")
+            console.log("deleted")
             
         }
     })
-  
+  OrderModel.find({},(err,docs)=>{
+      if(err){console.log(err)
+    } else if(!docs){console.log("mongoose query failed")
+} else{
+    res.json(docs)
+}
+  })
     //query DB and delete document (or maybe keep it, but mark as DELETED in case of mistake?)
     
 })
