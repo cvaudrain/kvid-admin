@@ -120,7 +120,7 @@ return(
     <input onChange={handleChange} name="description" placeholder="Job Description" />
     <textarea onChange={handleChange} name="notes" placeholder="Notes" className="centered" />
 
-        <button className="save-btn br-gradient-gray theGoodShading" onClick={sendForm}><i className="fas fa-2x fa-save"></i></button>
+        <button className="save-btn steelblue-fade theGoodShading" onClick={sendForm}><i className="fas fa-2x fa-save "></i></button>
       </form>
       <button className="save-btn br-gradient-aqua" onClick={nukeDatabase}> !Nuke DB!</button>
       </div>

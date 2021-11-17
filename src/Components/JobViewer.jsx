@@ -1,3 +1,4 @@
+import React from "react"
 import {useContext, useState,useEffect} from "react"
 // Components
 import JobListing from "./JobListing"
@@ -5,8 +6,20 @@ import ModalEditor from "./ModalEditor"
 import axios from "axios"
 import { useHistory } from "react-router"
 
+// let ModalContext;
+
 export default function JobViewer(props){
 const history = useHistory()
+
+// Filter for complete/incomplete
+// const [listFilter,setListFilter] = useState({
+//     active: false,
+//     completeOnly:false,
+//     incompleteOnly:false,
+//     paidOnly:false,
+//     unpaidOnly:false
+// })
+
     const [editMode, setEditMode] = useState(false)
     const [selectedJob, setSelectedJob] = useState(props.selectedJob)
     console.log("selected job:")
@@ -28,7 +41,7 @@ const [jobArray,setJobArray] = useState([{
 }])
 //get jobs from db
 // useEffect wrapper to fetch only once
-
+// ModalContext = React.createContext(selectedJob)
 useEffect(()=>{
      axios.post("/api/renderJobList","Requesting Jobs")
     .then((res)=>{
@@ -38,6 +51,10 @@ useEffect(()=>{
     .catch((err)=>console.log(err))
 },[])
 
+// useEffect(()=>{ //provide selectedJob context to child component ModalEditor
+//     ModalContext = React.createContext(selectedJob)
+
+// },[selectedJob])
 
 // CRUD Ops Client-Side
 // READ / RENDER
@@ -63,11 +80,14 @@ deletionId:deletionId})
 
 let editJob = (ev)=>{
     console.log("editJob()")
-    let jobId = ev.target.parentElement.parentElement.parentElement.parentElement._id
+    let jobId = ev.target.parentElement.parentElement.parentElement.parentElement.id
  console.log(`Job ID = ${jobId}`)
      let matched = jobArray.filter((n,i)=>{
-         return n._id = jobId
+         return n._id == jobId
      })
+     console.log("matched")
+     matched = matched[0]
+     console.log(matched[0])
         
         // console.log(`Match = ${match}`)
         setSelectedJob(
@@ -92,7 +112,15 @@ let editJob = (ev)=>{
 }
 
 let closeEditor = ()=>{
+    console.log("CLOSE modal")
+    axios.post("/api/renderJobList","Requesting Jobs")
+    .then((res)=>{
+        console.log(res.data)
+        jobArray !== res.data && setJobArray(res.data)
+    })
+    .catch((err)=>console.log(err))
     setEditMode(false)
+    console.log()
 }
 
     return(
@@ -133,6 +161,7 @@ let closeEditor = ()=>{
                 index={job.index}
                 delete={deleteJob}
                 edit={editJob}
+                
             />
             
 })}
@@ -149,3 +178,5 @@ let closeEditor = ()=>{
         </div>
     )
 }
+
+// export {ModalContext}

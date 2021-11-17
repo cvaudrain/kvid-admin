@@ -53,7 +53,7 @@ mongoose.connection.once("open",()=>console.log(`Connected to database: ${DB}`))
 
 const Order = new mongoose.Schema( //matches Schema in Client Application which connects to same DB (only for READ operation)
     {
-        id: Number,
+        // id: Number,
         jobName: String,
         description:String,
         price:Number,
@@ -66,6 +66,36 @@ const Order = new mongoose.Schema( //matches Schema in Client Application which 
     },
     {collection: "jobList"}
 )
+const CompletedJob = new mongoose.Schema( //matches Schema in Client Application which connects to same DB (only for READ operation)
+    {
+        id: Number,
+        jobName: String,
+        description:String,
+        price:Number,
+        priceInCents:Number,
+        customerName: String,
+        confirmationCode: String,
+        completed: String,
+        paid: String,
+        notes:String
+    },
+    {collection: "completedJobs"}
+)
+const DeletedJob = new mongoose.Schema( //matches Schema in Client Application which connects to same DB (only for READ operation)
+    {
+        id: Number,
+        jobName: String,
+        description:String,
+        price:Number,
+        priceInCents:Number,
+        customerName: String,
+        confirmationCode: String,
+        completed: String,
+        paid: String,
+        notes:String
+    },
+    {collection: "deletedJobs"}
+)
 const Administrator = new mongoose.Schema(
     {
         username:String,
@@ -77,7 +107,8 @@ const Administrator = new mongoose.Schema(
 Administrator.plugin(passportLocalMongoose) //MUST come before declaring Mongoose Model, after Delcaring Schema
 
 let OrderModel = mongoose.connection.model("OrderModel",Order)
-
+let CompletedJobModel = mongoose.connection.model("CompletedJobs",CompletedJob)
+let DeletedJobModel = mongoose.connection.model("DeletedJobs",DeletedJob)
 let AdministratorModel = mongoose.connection.model("AdministratorModel",Administrator)
 passport.use(AdministratorModel.createStrategy()) //4 Create Strategy 
 passport.serializeUser(AdministratorModel.serializeUser())
@@ -199,13 +230,30 @@ app.post("/api/deleteJob",(req,res)=>{
     res.json(docs)
 }
   })
+  
     //query DB and delete document (or maybe keep it, but mark as DELETED in case of mistake?)
     
 })
 app.post("/api/editJob",(req,res)=>{
-    console.log("post req from client recieved at /api/deleteJob")
+    console.log("post req from client recieved at /api/editJob")
     //receive payload with job obj
-    //query DB and delete document (or maybe keep it, but mark as DELETED in case of mistake?)
+    let updated = req.body.formVal
+   
+    console.log(updated)
+    OrderModel.findByIdAndUpdate(updated.id,updated,(err,doc)=>{
+        if(err){
+            console.log("ERROR")
+            console.log(err)
+            res.status(500)
+        } else if(doc){
+            console.log("FOUND")
+            console.log(doc)
+            console.log(updated)
+           res.json(`Updated from ${doc} to ${updated}`)
+           
+        }
+    }
+    )
 })
 
 

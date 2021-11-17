@@ -130,6 +130,9 @@ font-family: 'Libre Baskerville', serif;
   text-shadow:0 1px 2px white;
 }
 
+.italic{
+  font-style:italic;
+}
 /* COLORS */
 /* Colors. Backgrounds */
 .br-gray{
@@ -148,7 +151,7 @@ font-family: 'Libre Baskerville', serif;
     background: linear-gradient(128deg, rgb(32, 32, 32) 37%, rgb(26, 27, 27) 60%, rgb(8, 8, 8)1%);
 }
 .br-gradient-aqua{
-    background: linear-gradient(128deg, #77e0e7 37%, #5eb9c0 75%, #5fbdc3 1%);
+    background: linear-gradient(128deg, #77e7cb 37%, #5ec0b0 75%, #5fc3a2 1%);
 }
 .peach-gradient{
   background-color: rgb(221, 167, 104);
@@ -183,6 +186,9 @@ background: linear-gradient(150deg, rgba(255,255,255,1) 6%, rgba(226,226,226,1) 
 }
 /*  */
 /* colors.element color */
+.steelblue-fade{
+  background:#4b5566fa;
+}
 .white{
     color:#fff
 }
@@ -231,6 +237,9 @@ background: linear-gradient(150deg, rgba(255,255,255,1) 6%, rgba(226,226,226,1) 
     .top-space-sm{
       margin-top:5vh;
     }
+    .top-space-xs{
+      margin-top:2.5vh;
+    }
     .bottom-space{
       margin-bottom:12vh;
       }
@@ -275,6 +284,21 @@ background: linear-gradient(150deg, rgba(255,255,255,1) 6%, rgba(226,226,226,1) 
 
   /*  */
   /* Button Libr */
+  .inset{
+    margin:15px; 
+    padding:4px;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    color: #fff;
+    border:none;
+    /* box-shadow: 1px 3px 9px black; */
+    text-shadow: 0 1px 1px black;
+    box-shadow: inset 0 0 7px black;
+  }
   .pill{
     font-family: 'Karla', sans-serif;
     color: #fff;
@@ -355,7 +379,7 @@ background: linear-gradient(150deg, rgba(255,255,255,1) 6%, rgba(226,226,226,1) 
   /*  */
   .infoMessage{
     text-align:center;
-    background-color: #4d946abe;
+    background-color: #4b5566fa;
     color:#fff;
     margin:15px auto;
     padding:8px;

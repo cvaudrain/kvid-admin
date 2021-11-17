@@ -1,7 +1,12 @@
-import {useState} from "react"
+import React from "react"
+import {useState, useContext} from "react"
 import axios from "axios"
-
+// import {ModalContext} from "./JobViewer"
 export default function ModalEditor(props){
+
+//     let provider = useContext(ModalContext)
+//    console.log("provider")
+//    console.log(provider)
     const [formData, setFormData] = useState({
         jobName:props.jobName,
         price:props.price,
@@ -9,9 +14,17 @@ export default function ModalEditor(props){
       description:props.description,
       notes:props.notes,
       id:props.id,
-      priceInCents:props.priceInCents  
+      priceInCents:props.priceInCents
+    //     jobName:"",
+    //     price:"",
+    // customerName:"",
+    //   description:"",
+    //   notes:"",
+    //   id:"",
+    //   priceInCents:""
     })
-    
+    console.log("Modal:")
+    console.log(formData)
     let handleChange = (ev) =>{
     const {name,value} = ev.target
     setFormData((prev)=>{
@@ -58,7 +71,7 @@ export default function ModalEditor(props){
         <div className="option-row row">
         <div className="col-12">
         <button className="save-btn br-gradient-gray theGoodShading" onClick={sendForm}><i className="fas fa-2x fa-save icon-pad"></i></button>        <button className="magenta-gradient save-btn" onClick={props.delete}><i class="fas fa-2x fa-trash-alt "></i></button>
-        <button className="save-btn br-gradient-gray theGoodShading" onClick={()=>props.toggleModal}><i className="fas fa-2x fa-times icon-pad"></i></button>
+        <button className="save-btn br-gradient-gray theGoodShading" onClick={props.toggleModal}><i className="fas fa-2x fa-times icon-pad"></i></button>
         </div>
         </div>
            
