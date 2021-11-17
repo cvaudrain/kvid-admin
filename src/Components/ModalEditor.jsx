@@ -41,6 +41,8 @@ export default function ModalEditor(props){
             let payload = {
               formVal:formData
             }
+            payload.formVal.priceInCents = payload.formVal.price*100;
+            
             axios.post("/api/editJob",payload)
             .then((res)=>{
               console.log(res.data)

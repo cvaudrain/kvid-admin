@@ -27,6 +27,14 @@ const errorStr = kvidAlerts.errorStr
 const [alertMessage,setAlertMessage] = useState("info")
 const [messageStyle,setMessageStyle] = useState(styles.infoMessage) //change state based on error message
 
+const [highlightStyle,setHighlightStyle] = useState( //highlight backgrounds for required fields if left blank
+  {
+    jobName:{background:"inherit"},
+    price: {background:"inherit"},
+    customerName: {background:"inherit"}
+}
+  )
+
 let form = document.getElementById("job-form") 
 useEffect(()=>{ //reset form and style message on submission IF success
   if(alertMessage==="success"){
@@ -38,7 +46,7 @@ useEffect(()=>{ //reset form and style message on submission IF success
   setMessageStyle(styles.successMessage)
 // setFormData(defaultForm) setFormData will persist the current value even if we reset to blank
 }
-if(alertMessage==="error"){
+if(alertMessage==="error" || alertMessage ==="incomplete"){
   setMessageStyle(styles.errorMessage)
 }
 if(alertMessage==="info")setMessageStyle(styles.infoMessage)
@@ -76,14 +84,62 @@ return {
 }
 
     let sendForm = (ev)=>{
-        ev.preventDefault();
+        ev.preventDefault(); //validate required fields, style UI accordingly if invalid/missing required.
+      if(formData.jobName.length == 0 || formData.price.length == 0 || formData.customerName.length ==0){ //check required
+        setAlertMessage("incomplete") //set UI text message
+        setMessageStyle(styles.errorMessage) //set message background to error red
+        formData.jobName.length == 0 ? setHighlightStyle((prev)=>{ //set highlight state to red highlight for any blank requireds
+          return{
+            ...prev,
+            jobName: {background:"#c76b79d7"}
+          }
+        }) : //if filled now, reset to white background
+        setHighlightStyle((prev)=>{
+          return{
+            ...prev,
+            jobName: {background:"inherit"} //prevents staying highlighted if user fills it
+          }
+        })
+         formData.price.length == 0 ? setHighlightStyle((prev)=>{
+          return{
+            ...prev,
+           price: {background:"#c76b79d7"}
+          }
+        }) :
+        setHighlightStyle((prev)=>{
+          return{
+            ...prev,
+            price: {background:"#inherit"} //reset to normal background if filled
+          }
+        })
+         
+         formData.customerName.length ==0 ? setHighlightStyle((prev)=>{
+          return{
+            ...prev,
+            customerName: {background:"#c76b79d7"}
+          }
+        }) :
+        setHighlightStyle((prev)=>{
+          return{
+            ...prev,
+            customerName: {background:"inherit"}  //reset to normal background if filled
+          }
+        })
+        return; //prevents form submission to api
+      }
+      console.log("Did not return")
         let payload = {
           formVal:formData
         }
         axios.post("/api/addJob",payload)
         .then((res)=>{
           console.log(res.data)
-    setAlertMessage("success")
+    setAlertMessage("success") //success message styling, conditionally render appropriate text message
+    setHighlightStyle({ //unhighlight all fields after success
+      jobName:{background:"inherit"},
+      price: {background:"inherit"},
+      customerName: {background:"inherit"}
+  })
         })
         .catch((err)=>{
           console.log(err)
@@ -108,15 +164,15 @@ return(
              <p>
              {alertMessage === "info" && infoStr}
              {alertMessage === "success" && successStr}
-             {alertMessage == "error" && errorStr}
-             
+             {alertMessage === "error" && errorStr}
+             {alertMessage === "incomplete" && incomplete}
              </p>
            </div>
         </div>
       <form id="job-form" className="theGoodShading">
-        <input onChange={handleChange} name="jobName" placeholder="Job Name" required={true} />
-    <input onChange={handleChange} name="price" placeholder="Price" required={true} />
-    <input onChange={handleChange} name="customerName" placeholder="Client Name" required={true}/>
+        <input style={highlightStyle.jobName} onChange={handleChange} name="jobName" placeholder="Job Name" required={true} />
+    <input style={highlightStyle.price} onChange={handleChange} name="price" placeholder="Price" required={true} />
+    <input style={highlightStyle.customerName} onChange={handleChange} name="customerName" placeholder="Client Name" required={true}/>
     <input onChange={handleChange} name="description" placeholder="Job Description" />
     <textarea onChange={handleChange} name="notes" placeholder="Notes" className="centered" />
 

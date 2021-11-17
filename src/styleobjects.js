@@ -30,10 +30,14 @@
     width: "60vw",
     padding:"15px",
     position:"relative",
-    left:"24.9%",
     margin:"25px auto",
     boxShadow: "0 1px 5px rgb(138, 137, 137)",
     borderRadius:"7px"
+  },
+  colors:{
+    red: {
+      color:"red"
+    }
   }
 
 }
