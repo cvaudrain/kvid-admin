@@ -214,7 +214,9 @@ if (filter.completed === true){
         <div className="">
         <div className="centered pad-b">
         <div className="content-card theGoodShading "> <h1>{filter.currString} Jobs</h1></div>
-
+        <div className = "content-card-wide magenta-gradient white theGoodShading"><h4>Welcome to the Demo! (And congrats on skipping our Passport.js authentication login screen to see the admin side of this app!) <br/> Work orders the admins create will populate here. The confirmation code for each job will be sent to the customer/client, and they can enter it in the <strong>customer-facing payment portal</strong> to complete payments with our Stripe integration! <br/>Click the button below to see that demo in action (on the payment screen, you can enter "42" repeatedly in the card num, cvc and exp date to simulate a successful payment).</h4>
+        <a href="https://calm-brook-48041.herokuapp.com" target="_blank"><button className="theGoodShading filter-btn br-gradient-aqua padding-sm">Payment Demo</button></a>
+        </div>
            <div classname = "content-card theGoodShading"><h3></h3>
            <button onClick={toggleList} className="theGoodShading filter-btn magenta-gradient padding-sm">Show {filter.navString} Jobs</button>
            </div>
