@@ -22,7 +22,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 // app.use(express.static(__dirname))
-app.use(express.static(path.join(__dirname,".././build","index.html"))) //use build dir
+app.use(express.static(path.join(__dirname,".././build"))) //use build dir
 // app.use(express.static(path.join(__dirname,".././public"))) //Fixes MIME Type Error on delivery
 //GET Single Page App Index File from build in production
 app.get("*",(req,res)=>{ //can use "*" instead of "/" if issues arise.. what about "/*" to handle only Unknowns?
