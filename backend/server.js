@@ -182,8 +182,9 @@ app.post("/api/addJob",(req,res)=>{
 
 app.post("/api/renderJoblist",(req,res)=>{
     console.log("post req from client recieved at /api/renderJoblist")
-    //query DB for all active jobs
-    OrderModel.find({},(err,docs)=>{
+    console.log(req.body.completed)
+    //query DB for all active/inactive jobs depending on req.body.completed filter
+    OrderModel.find({completed:req.body.completed},(err,docs)=>{
     if(err){
         console.log(err)
         res.json(
@@ -245,7 +246,10 @@ app.post("/api/editJob",(req,res)=>{
             console.log("ERROR")
             console.log(err)
             res.status(500)
-        } else if(doc){
+        } if(!doc){
+            console.log("Query returned 0 matches")
+        }
+        else if(doc){
             console.log("FOUND")
             console.log(doc)
             console.log(updated)

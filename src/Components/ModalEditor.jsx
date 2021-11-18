@@ -128,7 +128,7 @@ console.log(alertMessage)
 
             let payload = {
               formVal:formData
-            }
+            } //Update priceInCents to ensure match price- Stripe object calcs payment amt in incrmt of USD 0.01
             payload.formVal.priceInCents = payload.formVal.price*100;
             
             axios.post("/api/editJob",payload)

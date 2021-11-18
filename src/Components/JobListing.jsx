@@ -1,10 +1,11 @@
 import {useContext, useState,useEffect} from "react"
 
 export default function JobListing(props){
-
+    
+   
     return(
         <div className="centered">
-        <div id={props.id} name={props.listIndex} className="content-card-xl theGoodShading padding">
+        <div  id={props.id} name={props.listIndex} className="content-card-xl theGoodShading padding">
         <div className="row">
             <div className="col">
                 <div className=""><h2>Job Name: <br/><span className="job-name">{props.jobName}</span></h2></div>
@@ -57,11 +58,14 @@ export default function JobListing(props){
         
         
         </div>
-        <div className="col-12  top-space-xs">
-        <button className=" br-gradient-aqua inset theGoodShading" onClick={props.delete}><i class="far fa-2x fa-check-circle"></i></button>
-        <p className="italic no-margin">Mark Complete</p>
+       { props.button}
+         <div className="col-12  top-space-xs">
+         <button className=" br-gradient-aqua inset theGoodShading" onClick={props.markComplete}><i class="far fa-2x fa-check-circle"></i></button>
+        <p className="italic no-margin">Mark {props.filterString}</p>
+        </div> 
+        
         </div>
-        </div>
+       
         </div>
         </div>
         

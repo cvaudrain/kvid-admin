@@ -79,6 +79,18 @@ form {
 /*  */
   /* PROJECT-SPECIFIC */
 /*  */
+.filter-btn{
+  font-family: 'Karla', sans-serif;
+    color: #fff;
+  text-shadow: 0 0 1px black;
+    border-radius: 10000px;
+    cursor: pointer;
+    border:none;
+    box-shadow: 1px 5px 12px black;
+    text-shadow: 0 1px 1px black;
+    overflow: hidden;
+
+}
 .gallery-br{
 background: url("images/br-desktop.png");
     background-repeat: no-repeat;
@@ -215,6 +227,9 @@ background: linear-gradient(150deg, rgba(255,255,255,1) 6%, rgba(226,226,226,1) 
   }
   .padding {
     padding: 40px; 
+  }
+  .padding-sm{
+    padding:10px;
   }
   .pad-b{
     padding-bottom:100px;

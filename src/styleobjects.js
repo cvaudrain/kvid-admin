@@ -38,6 +38,11 @@
     red: {
       color:"red"
     }
+  },
+  display: {
+    none : {
+      display:"none"
+    }
   }
 
 }
