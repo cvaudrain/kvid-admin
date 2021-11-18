@@ -32,11 +32,14 @@ app.get("*",(req,res)=>{ //can use "*" instead of "/" if issues arise.. what abo
 //Establish DB Connection
 
 //FOR BUILD//
-mongoose.connect(process.env.URI_CONNECTION+DB,{
+console.log(process.env.DB_USERNAME)
+console.log(process.env.COLLECTION)
+console.log(process.env.DB_CONNECTION)
+mongoose.connect(process.env.DB_CONNECTION,{
     useUnifiedTopology: true,
    useNewUrlParser: true,
-   useCreateIndex: true,
-   useFindAndModify: false,
+//    useCreateIndex: true, deprecated
+//    useFindAndModify: false, deprecated
    connectTimeoutMS: 10000
 })
 
