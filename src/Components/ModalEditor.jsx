@@ -167,7 +167,7 @@ console.log(alertMessage)
     
         <div className="option-row row">
         <div className="col-12">
-        <button className="save-btn br-gradient-gray theGoodShading" onClick={sendForm}><i className="fas fa-2x fa-save icon-pad"></i></button>        <button className="magenta-gradient save-btn" onClick={props.delete}><i class="fas fa-2x fa-trash-alt "></i></button>
+        <button className="save-btn br-gradient-gray theGoodShading" onClick={sendForm}><i className="fas fa-2x fa-save icon-pad"></i></button>        
         <button className="save-btn br-gradient-gray theGoodShading" onClick={props.toggleModal}><i className="fas fa-2x fa-times icon-pad"></i></button>
         </div>
         </div>

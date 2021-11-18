@@ -147,15 +147,15 @@ return {
         })
       }
 
-    let nukeDatabase = (ev)=>{
-        ev.preventDefault()
-        let payload = "Delete"
-        axios.post("/api/nuke",payload)
-        .then((res)=>{
-            console.log(res)
-        })
-        .catch((err)=>console.log(err))
-    }
+    // let nukeDatabase = (ev)=>{
+    //     ev.preventDefault()
+    //     let payload = "Delete"
+    //     axios.post("/api/nuke",payload)
+    //     .then((res)=>{
+    //         console.log(res)
+    //     })
+    //     .catch((err)=>console.log(err))
+    // }
 return(
 <div className="">
 <div className="centered">
@@ -169,16 +169,23 @@ return(
              </p>
            </div>
         </div>
-      <form id="job-form" className="theGoodShading">
+      <form id="job-form" className="theGoodShading pad-b">
         <input style={highlightStyle.jobName} onChange={handleChange} name="jobName" placeholder="Job Name" required={true} />
     <input style={highlightStyle.price} onChange={handleChange} name="price" placeholder="Price" required={true} />
     <input style={highlightStyle.customerName} onChange={handleChange} name="customerName" placeholder="Client Name" required={true}/>
     <input onChange={handleChange} name="description" placeholder="Job Description" />
     <textarea onChange={handleChange} name="notes" placeholder="Notes" className="centered" />
 
-        <button className="save-btn steelblue-fade theGoodShading" onClick={sendForm}><i className="fas fa-2x fa-save "></i></button>
+        <button className="save-btn steelblue-fade theGoodShading " onClick={sendForm}><i className="fas fa-3x fa-save "></i></button>
       </form>
-      <button className="save-btn br-gradient-aqua" onClick={nukeDatabase}> !Nuke DB!</button>
+      <footer class="centered">
+        <div class="pad-t">
+        <p class="">Ken Vaudrain Illustration & Design</p>
+<p>2021-2022</p>
+<p class="pad-t"><a href="https://www.kvidesign.com/home">Visit Main Site</a></p>
+</div>
+    </footer>
+      {/* <button className="save-btn br-gradient-aqua" onClick={nukeDatabase}> !Nuke DB!</button> */}
       </div>
 )
 }
