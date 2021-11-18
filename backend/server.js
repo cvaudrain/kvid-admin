@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const cors = require("cors")
 const app = express()
+// const app2 = express()
 const DB = "kvidjobs"
 const PORT = process.env.PORT || 4747
 //Middleware
@@ -20,11 +21,11 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-
+// app.use(express.static(__dirname))
 app.use(express.static(path.join(__dirname,".././build","index.html"))) //use build dir
-
+app.use(express.static(path.join(__dirname,".././public"))) //Fixes MIME Type Error on delivery
 //GET Single Page App Index File from build in production
-app.get("*",(req,res)=>{
+app.get("*",(req,res)=>{ //can use "*" instead of "/" if issues arise
     res.sendFile(path.join(__dirname,".././build","index.html")) //deliver index.html from prod build dir
 })
 
@@ -261,5 +262,10 @@ app.post("/api/editJob",(req,res)=>{
 })
 
 
+// Deliver Non-React Customer-Facing Payment Portal via Express
+
+app.get("/payments",(req,res)=>{
+    res.sendFile(path.join(__dirname,".././public","/payments.html"))
+})
 
 

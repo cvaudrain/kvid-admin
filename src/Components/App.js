@@ -36,6 +36,7 @@ let selected = {
       faClass={"fas fa-3x fa-arrow-circle-left"}
     />
     <JobCreator />
+    
     </Route>
 
     <Route exact path = "/">
