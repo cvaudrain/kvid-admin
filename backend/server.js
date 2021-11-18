@@ -25,29 +25,29 @@ app.use(passport.session())
 app.use(express.static(path.join(__dirname,".././build","index.html"))) //use build dir
 app.use(express.static(path.join(__dirname,".././public"))) //Fixes MIME Type Error on delivery
 //GET Single Page App Index File from build in production
-app.get("*",(req,res)=>{ //can use "*" instead of "/" if issues arise
+app.get("*",(req,res)=>{ //can use "*" instead of "/" if issues arise.. what about "/*" to handle only Unknowns?
     res.sendFile(path.join(__dirname,".././build","index.html")) //deliver index.html from prod build dir
 })
 
 //Establish DB Connection
 
 //FOR BUILD//
-// mongoose.connect(process.env.DB_URL+DB,{
-//     useUnifiedTopology: true,
-//    useNewUrlParser: true,
-//    useCreateIndex: true,
-//    useFindAndModify: false,
-//    connectTimeoutMS: 10000
-// })
+mongoose.connect(process.env.URI_CONNECTION+DB,{
+    useUnifiedTopology: true,
+   useNewUrlParser: true,
+   useCreateIndex: true,
+   useFindAndModify: false,
+   connectTimeoutMS: 10000
+})
 
 //FOR LOCAL ONLY testing connection to Mongo//
-mongoose.connect("mongodb://localhost:27017/"+DB,{
-   useUnifiedTopology: true,
-   useNewUrlParser: true,
-   connectTimeoutMS: 10000
-   //    useCreateIndex: true, deprecated
-//    useFindAndModify: false, deprecated
-});
+// mongoose.connect("mongodb://localhost:27017/"+DB,{
+//    useUnifiedTopology: true,
+//    useNewUrlParser: true,
+//    connectTimeoutMS: 10000
+//    //    useCreateIndex: true, deprecated
+// //    useFindAndModify: false, deprecated
+// });
 //Connect to DB or Handle Err
 mongoose.connection.on("error",(error)=>console.log(error))
 mongoose.connection.once("open",()=>console.log(`Connected to database: ${DB}`))
